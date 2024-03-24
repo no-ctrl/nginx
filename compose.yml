@@ -5,23 +5,23 @@ services:
       context: .
     container_name: nginx-proxy-${W_APP:-pox}
     environment:
-      - W_URL=${W_URL:-https://coolify.io}
+      - W_PROXY_URL=${W_PROXY_URL:-https://coolify.io}
       - W_CLIENT_MAX_BODY_SIZE=${W_CLIENT_MAX_BODY_SIZE:-20M}
     ports:
       - 8080:80
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - 'traefik.http.routers.http-0-pox.rule=Host(`pox.example.com`) && PathPrefix(`/`)'
-      - traefik.http.routers.http-0-pox.entryPoints=http
+      - 'traefik.http.routers.http-0-${W_APP:-pox}.rule=Host(`${W_APP:-pox}.${W_DOMAIN:-example.com}`) && PathPrefix(`/`)'
+      - traefik.http.routers.http-0-${W_APP:-pox}.entryPoints=http
       # enable https
-      - traefik.http.routers.http-0-pox.middlewares=gzip
-      - traefik.http.services.http-0-pox.loadbalancer.server.port=8090
-      - traefik.http.routers.http-0-pox.tls=true
-      - traefik.http.routers.http-0-pox.tls.certresolver=letsencrypt
-      - traefik.http.routers.http-0-pox.entryPoints=https
-      - traefik.http.routers.http-0-pox.middlewares=redirect-to-https
+      - traefik.http.routers.http-0-${W_APP:-pox}.middlewares=gzip
+      - traefik.http.services.http-0-${W_APP:-pox}.loadbalancer.server.port=8090
+      - traefik.http.routers.http-0-${W_APP:-pox}.tls=true
+      - traefik.http.routers.http-0-${W_APP:-pox}.tls.certresolver=letsencrypt
+      - traefik.http.routers.http-0-${W_APP:-pox}.entryPoints=https
+      - traefik.http.routers.http-0-${W_APP:-pox}.middlewares=redirect-to-https
 
 # configs
-# domain: https://pox.example.com:80
+# domain: https://${W_APP:-pox}.${W_DOMAIN:-example.com}:80
 
