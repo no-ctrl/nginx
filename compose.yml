@@ -1,8 +1,13 @@
 version: '3'
 services:
   web:
+    image: ghcr.io/cabaalexander/coolify-nginx-reverse-proxy:latest
     build:
       context: .
+      tags:
+        - "ghcr.io/cabaalexander/coolify-nginx-reverse-proxy:latest"
+      labels:
+        org.opencontainers.image.source: https://github.com/cabaalexander/coolify-nginx-reverse-proxy
     container_name: nginx-proxy-${W_APP:-pox}
     environment:
       - W_PROXY_URL=${W_PROXY_URL:-https://coolify.io}
