@@ -1,8 +1,12 @@
-.PHONY: main
-main:
-	@echo "Commands"
-	@echo "- deploy"
+.PHONY: all
+all:
+	@docker compose up --build
+
+.PHONY: build
+build:
+	@docker compose build
 
 .PHONY: deploy
 deploy:
-	@docker push ghcr.io/cabaalexander/coolify-nginx-reverse-proxy:latest
+	@docker compose build --push
+	
