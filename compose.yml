@@ -11,5 +11,5 @@ services:
       labels:
         org.opencontainers.image.source: https://github.com/cabaalexander/coolify-nginx-reverse-proxy
     environment:
-      - PROXY_URL=${PROXY_URL:-https://example.com/}
+      - PROXY_URL=${PROXY_URL:-https://eaeo.top/}
     restart: unless-stopped
