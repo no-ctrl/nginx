@@ -1,15 +1,6 @@
 services:
   web:
     image: ghcr.io/cabaalexander/coolify-nginx-reverse-proxy:latest
-    build:
-      context: .
-      platforms:
-        - "linux/amd64"
-        - "linux/arm64"
-      tags:
-        - "ghcr.io/cabaalexander/coolify-nginx-reverse-proxy:latest"
-      labels:
-        org.opencontainers.image.source: https://github.com/cabaalexander/coolify-nginx-reverse-proxy
     environment:
       - PROXY_URL=https://eaeo.top/
     restart: unless-stopped
